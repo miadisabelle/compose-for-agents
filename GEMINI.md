@@ -83,3 +83,6 @@ This document provides an overview of the various multi-agent systems and applic
 ### 📦 Vercel (MCP UI with Vercel AI SDK)
 **Location**: `/a/src/compose-for-agents/vercel/`
 **Purpose**: See [vercel.md](vercel.md) for details.
+
+## 💡 Coding Scenarios
+See [coding_scenarios.md](coding_scenarios.md) for possible coding practice scenarios.
