@@ -80,6 +80,6 @@ This document provides an overview of the various multi-agent systems and applic
 **Location**: `/a/src/compose-for-agents/embabel/`
 **Purpose**: (Based on directory name, likely related to Embabel framework, but no `README.md` found for detailed analysis.)
 
-### 📦 vercel
+### 📦 Vercel (MCP UI with Vercel AI SDK)
 **Location**: `/a/src/compose-for-agents/vercel/`
-**Purpose**: (Based on directory name, likely related to Vercel deployment, but no `README.md` found for detailed analysis.)
+**Purpose**: See [vercel.md](vercel.md) for details.
