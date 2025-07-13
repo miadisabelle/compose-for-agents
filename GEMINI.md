@@ -86,3 +86,39 @@ This document provides an overview of the various multi-agent systems and applic
 
 ## 💡 Coding Scenarios
 See [coding_scenarios.md](coding_scenarios.md) for possible coding practice scenarios.
+
+## 📝 On Writing Effective Commit Messages
+
+As demonstrated by recent interactions, crafting clear, concise, and informative commit messages is crucial for maintaining a healthy and understandable codebase. A good commit message serves as a historical record, explaining *why* a change was made, not just *what* was changed.
+
+**Key Principles for Effective Commit Messages:**
+
+1.  **Subject Line (First Line):**
+    *   **Concise:** Keep it under 50-72 characters.
+    *   **Imperative Mood:** Use a strong, active verb (e.g., "Fix," "Add," "Refactor," "Update").
+    *   **Capitalize First Letter:** Start with a capital letter.
+    *   **No Period:** Do not end with a period.
+    *   **Prefix (Optional but Recommended):** Use a prefix to categorize the change (e.g., `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`).
+
+2.  **Body (After a Blank Line):**
+    *   **Explain the "Why":** Detail the motivation for the change, the problem it solves, and any context that might be helpful for future readers.
+    *   **Elaborate on "What":** Provide more technical details about the implementation if necessary, but avoid simply repeating the code.
+    *   **Use Bullet Points or Paragraphs:** Structure the information for readability.
+    *   **Wrap Lines:** Keep lines around 72 characters for better readability in various git tools.
+
+**Example of a Good Commit Message:**
+
+```
+feat: implement user authentication with OAuth2
+
+This commit introduces a new user authentication system using OAuth2.
+
+- Integrates with Google as an identity provider.
+- Adds necessary routes for login, callback, and logout.
+- Implements token validation and refresh mechanisms.
+- Updates user model to store OAuth-specific details.
+
+Addresses #123
+```
+
+By adhering to these guidelines, we ensure that our commit history is a valuable resource for understanding the evolution of the project and facilitating collaboration.
