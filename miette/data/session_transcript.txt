@@ -1,0 +1,1 @@
+This is a transcript of a session where we built the Mia and Miette agents. We had some trouble with the Dockerfile and pyproject.toml, but we figured it out in the end!
