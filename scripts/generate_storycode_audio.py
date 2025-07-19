@@ -21,8 +21,13 @@ class StoryCodeAudioGenerator:
     def __init__(self, project_id: str, credentials_path: str = None):
         """Initialize with Google Cloud project configuration"""
         self.project_id = project_id
-        if credentials_path:
+        
+        # Handle authentication - prefer API key from environment
+        if credentials_path and os.path.exists(credentials_path):
             os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+        elif 'GOOGLE_API_KEY' in os.environ:
+            # For API key authentication, we don't need service account credentials
+            pass
         
         self.client = texttospeech.TextToSpeechClient()
         self.setup_pronunciation_dict()
