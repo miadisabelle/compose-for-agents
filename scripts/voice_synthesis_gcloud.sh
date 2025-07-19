@@ -73,6 +73,7 @@ curl -X POST -H "Content-Type: application/json" \
     \"text\": $JSON_TEXT
   },
   \"voice\": {
+    \"languageCode\": \"en-GB\",
     \"name\": \"en-GB-Chirp3-HD-Achernar\"
   },
   \"audioConfig\": {
