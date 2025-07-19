@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "miette-agent"
+version = "0.1.0"
+description = "A narrative generation agent."
+authors = ["Your Name <you@example.com>"]
+packages = [{include = "agents"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

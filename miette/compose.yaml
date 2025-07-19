@@ -1,0 +1,7 @@
+services:
+  miette:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/app/data
