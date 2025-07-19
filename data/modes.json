@@ -1,0 +1,458 @@
+{
+  "modes": [
+    {
+      "id": "walking",
+      "name": "Walking Mode",
+      "description": "Mobile context with voice-first interaction",
+      "contextVariables": [
+        {
+          "name": "location",
+          "type": "location",
+          "description": "GPS coordinates"
+        },
+        {
+          "name": "pace",
+          "type": "activity",
+          "description": "Walking speed"
+        },
+        {
+          "name": "weather",
+          "type": "custom",
+          "description": "Current weather conditions"
+        },
+        {
+          "name": "time_of_day",
+          "type": "time",
+          "description": "Current time context"
+        }
+      ],
+      "defaultCapabilities": [
+        "VoiceNotes",
+        "StepCounter",
+        "LocationAware",
+        "RouteGuide",
+        "EnvironmentalAwareness",
+        "ActivityTracking"
+      ],
+      "uiAdapter": {
+        "layout": "minimal",
+        "primaryActions": [
+          "voice",
+          "quick-note",
+          "pause",
+          "location"
+        ],
+        "visualStyle": "walking"
+      },
+      "triggers": [
+        {
+          "phrase": "going for a walk",
+          "confidence": 0.8,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "let's walk and talk",
+          "confidence": 0.9,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "heading out",
+          "confidence": 0.7,
+          "autoSwitch": false
+        },
+        {
+          "phrase": "on the move",
+          "confidence": 0.75,
+          "autoSwitch": true
+        }
+      ]
+    },
+    {
+      "id": "desktop",
+      "name": "Desktop Mode",
+      "description": "Full-featured workspace interaction",
+      "contextVariables": [
+        {
+          "name": "screen",
+          "type": "device",
+          "description": "Screen resolution and setup"
+        },
+        {
+          "name": "workspace",
+          "type": "custom",
+          "description": "Active workspace"
+        },
+        {
+          "name": "applications",
+          "type": "custom",
+          "description": "Running applications"
+        },
+        {
+          "name": "focus_mode",
+          "type": "custom",
+          "description": "Current focus state"
+        }
+      ],
+      "defaultCapabilities": [
+        "FileUpload",
+        "TextAnalysis",
+        "CodeReview",
+        "DeploymentScripting",
+        "EnvironmentConfiguration",
+        "SystemAnalysis",
+        "ArchitecturalDesign"
+      ],
+      "uiAdapter": {
+        "layout": "standard",
+        "primaryActions": [
+          "upload",
+          "analyze",
+          "review",
+          "deploy",
+          "configure"
+        ],
+        "visualStyle": "desktop"
+      },
+      "triggers": [
+        {
+          "phrase": "at my desk",
+          "confidence": 0.7,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "working on my computer",
+          "confidence": 0.8,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "need to focus",
+          "confidence": 0.6,
+          "autoSwitch": false
+        },
+        {
+          "phrase": "back to work",
+          "confidence": 0.75,
+          "autoSwitch": true
+        }
+      ]
+    },
+    {
+      "id": "meditation",
+      "name": "Meditation Mode",
+      "description": "Mindful, contemplative interaction",
+      "contextVariables": [
+        {
+          "name": "ambiance",
+          "type": "custom",
+          "description": "Audio environment"
+        },
+        {
+          "name": "duration",
+          "type": "time",
+          "description": "Session length"
+        },
+        {
+          "name": "breathing_pattern",
+          "type": "activity",
+          "description": "Current breathing rhythm"
+        },
+        {
+          "name": "mindfulness_level",
+          "type": "custom",
+          "description": "Current mindfulness state"
+        }
+      ],
+      "defaultCapabilities": [
+        "GuidedBreathing",
+        "SoundscapeGeneration",
+        "MindfulReflection",
+        "EmotionalSupport",
+        "InteractiveNarration"
+      ],
+      "uiAdapter": {
+        "layout": "minimal",
+        "primaryActions": [
+          "breathe",
+          "reflect",
+          "silence",
+          "guide"
+        ],
+        "visualStyle": "meditation"
+      },
+      "triggers": [
+        {
+          "phrase": "time to meditate",
+          "confidence": 0.9,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "need some mindfulness",
+          "confidence": 0.7,
+          "autoSwitch": false
+        },
+        {
+          "phrase": "feeling overwhelmed",
+          "confidence": 0.6,
+          "autoSwitch": false
+        },
+        {
+          "phrase": "let's center ourselves",
+          "confidence": 0.85,
+          "autoSwitch": true
+        }
+      ]
+    },
+    {
+      "id": "dancing",
+      "name": "Dancing Mode",
+      "description": "Rhythm and movement-focused interaction",
+      "contextVariables": [
+        {
+          "name": "music",
+          "type": "activity",
+          "description": "Current track"
+        },
+        {
+          "name": "energy",
+          "type": "custom",
+          "description": "Energy level 1-10"
+        },
+        {
+          "name": "dance_style",
+          "type": "activity",
+          "description": "Current dance style"
+        },
+        {
+          "name": "tempo",
+          "type": "custom",
+          "description": "Music tempo BPM"
+        }
+      ],
+      "defaultCapabilities": [
+        "RhythmCues",
+        "TempoTracking",
+        "MovementGuide",
+        "EnergySync",
+        "MusicGeneration",
+        "AudioProcessing"
+      ],
+      "uiAdapter": {
+        "layout": "immersive",
+        "primaryActions": [
+          "rhythm",
+          "tempo",
+          "energy",
+          "flow",
+          "sync"
+        ],
+        "visualStyle": "dance"
+      },
+      "triggers": [
+        {
+          "phrase": "let's dance",
+          "confidence": 0.95,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "feeling the rhythm",
+          "confidence": 0.8,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "time to move",
+          "confidence": 0.7,
+          "autoSwitch": false
+        },
+        {
+          "phrase": "music is calling",
+          "confidence": 0.85,
+          "autoSwitch": true
+        }
+      ]
+    },
+    {
+      "id": "driving",
+      "name": "Driving Mode",
+      "description": "Safe, hands-free vehicle interaction",
+      "contextVariables": [
+        {
+          "name": "vehicle_type",
+          "type": "device",
+          "description": "Type of vehicle"
+        },
+        {
+          "name": "destination",
+          "type": "location",
+          "description": "Navigation destination"
+        },
+        {
+          "name": "traffic",
+          "type": "custom",
+          "description": "Current traffic conditions"
+        },
+        {
+          "name": "hands_free",
+          "type": "device",
+          "description": "Hands-free capability status"
+        }
+      ],
+      "defaultCapabilities": [
+        "VoiceNotes",
+        "RouteGuide",
+        "LocationAware",
+        "HandsFreeOperation",
+        "TrafficAwareness"
+      ],
+      "uiAdapter": {
+        "layout": "minimal",
+        "primaryActions": [
+          "voice",
+          "navigate",
+          "call",
+          "music"
+        ],
+        "visualStyle": "driving"
+      },
+      "triggers": [
+        {
+          "phrase": "driving now",
+          "confidence": 0.9,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "in the car",
+          "confidence": 0.8,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "on the road",
+          "confidence": 0.75,
+          "autoSwitch": false
+        }
+      ]
+    },
+    {
+      "id": "meeting",
+      "name": "Meeting Mode",
+      "description": "Collaborative and note-taking focused",
+      "contextVariables": [
+        {
+          "name": "participants",
+          "type": "custom",
+          "description": "Meeting participants"
+        },
+        {
+          "name": "meeting_type",
+          "type": "activity",
+          "description": "Type of meeting"
+        },
+        {
+          "name": "agenda",
+          "type": "custom",
+          "description": "Meeting agenda"
+        },
+        {
+          "name": "recording",
+          "type": "device",
+          "description": "Recording status."
+        }
+      ],
+      "defaultCapabilities": [
+        "MeetingNotes",
+        "CollaborativeEditing",
+        "VoiceTranscription",
+        "AgendaTracking",
+        "ActionItems"
+      ],
+      "uiAdapter": {
+        "layout": "standard",
+        "primaryActions": [
+          "notes",
+          "transcribe",
+          "agenda",
+          "actions"
+        ],
+        "visualStyle": "meeting"
+      },
+      "triggers": [
+        {
+          "phrase": "in a meeting",
+          "confidence": 0.9,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "starting the call",
+          "confidence": 0.8,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "let's collaborate",
+          "confidence": 0.7,
+          "autoSwitch": false
+        }
+      ]
+    },
+    {
+      "id": "coding",
+      "name": "Coding Mode",
+      "description": "Development and programming focused",
+      "contextVariables": [
+        {
+          "name": "language",
+          "type": "custom",
+          "description": "Programming language"
+        },
+        {
+          "name": "project",
+          "type": "custom",
+          "description": "Current project"
+        },
+        {
+          "name": "ide",
+          "type": "device",
+          "description": "Development environment"
+        },
+        {
+          "name": "debug_mode",
+          "type": "activity",
+          "description": "Debugging status"
+        }
+      ],
+      "defaultCapabilities": [
+        "CodeReview",
+        "DebuggingAssistance",
+        "DocumentationGen",
+        "TestGeneration",
+        "RefactoringHelp"
+      ],
+      "uiAdapter": {
+        "layout": "standard",
+        "primaryActions": [
+          "review",
+          "debug",
+          "document",
+          "test",
+          "refactor"
+        ],
+        "visualStyle": "coding"
+      },
+      "triggers": [
+        {
+          "phrase": "time to code",
+          "confidence": 0.85,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "writing some code",
+          "confidence": 0.8,
+          "autoSwitch": true
+        },
+        {
+          "phrase": "debugging this",
+          "confidence": 0.75,
+          "autoSwitch": false
+        }
+      ]
+    }
+  ]
+}
