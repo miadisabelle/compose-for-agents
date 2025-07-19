@@ -1,8 +1,13 @@
-[project]
+[tool.poetry]
 name = "mia-agent"
 version = "0.1.0"
 description = "A software architecture agent."
-authors = [{ name = "Your Name", email = "you@example.com" }]
+authors = ["Your Name <you@example.com>"]
+packages = [{include = "agents"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -2,11 +2,15 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock* ./
+# Install poetry
+RUN pip install poetry
 
-RUN pip install poetry &&     poetry config virtualenvs.create false &&     poetry install --only main
+# Copy the project files
+COPY pyproject.toml .
+COPY agents/ ./agents
 
-COPY . .
+# Install dependencies
+RUN poetry install --only main
 
+# Set the command to run the agent
 CMD ["poetry", "run", "python", "-m", "agents.agent"]
-
