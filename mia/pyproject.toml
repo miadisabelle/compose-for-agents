@@ -1,0 +1,8 @@
+[project]
+name = "mia-agent"
+version = "0.1.0"
+description = "A software architecture agent."
+authors = [{ name = "Your Name", email = "you@example.com" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"

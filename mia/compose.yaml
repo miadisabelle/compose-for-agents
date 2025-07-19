@@ -1,0 +1,6 @@
+services:
+  mia:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python -m agents.agent
