@@ -211,6 +211,10 @@ docker compose logs -f     # System trace analysis
 # Miette: Narrative weaving operations  
 cat data/narrative_output.md    # Story viewing
 ./run_miette.sh                 # Story weaving execution
+
+# StoryCode Audio Generation (Walking Meditation)
+cd scripts/
+python generate_storycode_audio.py ../StoryCode.md --project-id YOUR_PROJECT_ID --chapters
 ```
 
 ## Special Considerations
