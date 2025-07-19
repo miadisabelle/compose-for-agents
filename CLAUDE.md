@@ -212,53 +212,67 @@ docker compose logs -f     # System trace analysis
 cat data/narrative_output.md    # Story viewing
 ./run_miette.sh                 # Story weaving execution
 
-# StoryCode Audio Generation (Walking Meditation)
+# UNIFIED StoryCode to MP3 Pipeline (ONE COMMAND)
 cd scripts/
-./voice_synthesis_gcloud.sh ../StoryCode.md ../audio/output.wav  # PRIMARY COMMAND
+./storycode_to_mp3.sh ../StoryCode.md                           # Complete pipeline
+./storycode_to_mp3.sh ../StoryCode.md --title "Custom Title"    # With custom metadata
+./storycode_to_mp3.sh ../StoryCode.md --dry-run                 # Preview mode
 
-# Audio Enhancement Pipeline (WAV → Tagged MP3)
-cd audio-pipeline-toolkit/
-python audio_prep_format_n_tags.py --title "Chronicle Title" --artist "en-GB-Chirp3-HD-Achernar" \
-  --album "Repository Chronicles" --genre "Technical Narrative" ../audio/input.wav output.mp3
+# Legacy Commands (Use unified pipeline above instead)
+./voice_synthesis_gcloud.sh ../StoryCode.md ../audio/output.wav # Voice synthesis only
 ```
 
 ## Audio Pipeline Integration
 
-### Two-Stage Audio Production Workflow
+### Unified StoryCode to MP3 Production System
 
-**Stage 1: Voice Synthesis (scripts/)**
-- **PRIMARY**: `voice_synthesis_gcloud.sh` - Production-ready TTS with gcloud auth
-- **DEPRECATED**: `generate_storycode_audio.py` - Complex Python implementation (use for reference only)
-- **DEPRECATED**: `simple_tts_demo.py` - REST API approach (incomplete)
-- **Cleanup needed**: Remove debug files and test artifacts
+**PRODUCTION READY**: `scripts/storycode_to_mp3.sh` - Complete pipeline in one command
 
-**Stage 2: Audio Enhancement (audio-pipeline-toolkit/)**
-- **Core**: `audio_prep_format_n_tags.py` - WAV → MP3 conversion with ID3 metadata
-- **Wrapper**: `mp3_tagger.sh` - Environment-based batch processing
-- **Dependencies**: mutagen, pydub for audio processing
+**Architecture**: Two-stage integrated workflow
+1. **Voice Synthesis**: StoryCode.md → WAV (via gcloud TTS + en-GB-Chirp3-HD-Achernar)
+2. **Audio Enhancement**: WAV → Tagged MP3 (via audio-pipeline-toolkit)
 
-### Complete Audio Production Pipeline
+**Features**:
+- ✅ **One Command**: Complete StoryCode → Professional MP3
+- ✅ **Smart Defaults**: Auto-generates titles, metadata, output filenames
+- ✅ **Customizable**: All metadata fields configurable via command line
+- ✅ **Error Handling**: Dependency checks, validation, cleanup
+- ✅ **Dry Run Mode**: Preview without execution
+- ✅ **Professional Output**: 160kbps MP3 with ID3v2.4.0 metadata
+
+### Usage Examples
 ```bash
-# 1. Generate voice synthesis (WAV output)
-./scripts/voice_synthesis_gcloud.sh StoryCode.md audio/raw_story.wav
+# Simple conversion (auto-generates everything)
+./storycode_to_mp3.sh ../StoryCode.md
 
-# 2. Convert to tagged MP3 
-cd audio-pipeline-toolkit/
-python audio_prep_format_n_tags.py \
+# Custom title and output location
+./storycode_to_mp3.sh ../StoryCode.md ../audio/my_story.mp3 --title "My Technical Tale"
+
+# Full metadata customization
+./storycode_to_mp3.sh ../StoryCode.md \
   --title "Chronicle of the Agent Kingdom" \
   --artist "en-GB-Chirp3-HD-Achernar" \
-  --album "Repository StoryCode Chronicles" \
-  --genre "Technical Narrative" \
-  --date "2025" \
-  ../audio/raw_story.wav ../audio/chronicle_final.mp3
+  --album "Repository Chronicles" \
+  --genre "Walking Meditation" \
+  --date "2025"
+
+# Preview mode (shows what would be done)
+./storycode_to_mp3.sh ../StoryCode.md --dry-run
 ```
 
 ### Audio Metadata Standards for StoryCode
-- **Title**: StoryCode filename or chapter title
+- **Title**: Auto-derived from filename or custom via `--title`
 - **Artist**: "en-GB-Chirp3-HD-Achernar" (voice identifier)
-- **Album**: "Repository StoryCode Chronicles" or repo name
-- **Genre**: "Technical Narrative" or "Walking Meditation"
-- **Bitrate**: 320k (high quality for technical content)
+- **Album**: "Repository StoryCode Chronicles" (default) or custom via `--album`
+- **Genre**: "Technical Narrative" (default) or "Walking Meditation"
+- **Date**: Current year (auto) or custom via `--date`
+- **Bitrate**: 320k input → 160kbps optimized output
+- **Format**: MP3 with ID3v2.4.0 metadata, 24kHz, Monaural
+
+### Legacy Components (Now Integrated)
+- `voice_synthesis_gcloud.sh` - Integrated as Stage 1
+- `audio-pipeline-toolkit/` - Integrated as Stage 2
+- Dependencies: gcloud, jq, mutagen, pydub
 
 ## Special Considerations
 
