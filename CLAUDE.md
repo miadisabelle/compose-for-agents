@@ -229,10 +229,17 @@ All projects use standardized MCP tools:
 
 ### Documentation Patterns
 - **CLAUDE.md**: Development guidance (this file)
-- **DESIGN.md**: Architectural planning (where present)
-- **StoryCode.md**: Narrative technical documentation (mia/)
-- **CAPABILITIES.md**: Structured capability catalog
-- **PERSONAS.md**: Agent persona definitions with mode mappings
+- **DESIGN.md**: Architectural planning (where present) 
+- **StoryCode.md**: Narrative technical documentation following the "Whispering Castle" pattern - technical challenges told as magical stories
+- **CAPABILITIES.md**: Structured capability catalog with permissions mapping
+- **PERSONAS.md**: Agent persona definitions with mode and capability mappings
+
+### Narrative Documentation Style (StoryCode.md Pattern)
+The Mia agent demonstrates the **StoryCode.md** narrative documentation pattern:
+- Technical challenges transformed into magical stories ("castle construction spells", "builder-golems")
+- Docker/Poetry issues become language dialect problems between "ancient tongue" and "lyrical dialect"
+- Build failures become "puffs of grey smoke" and spell corrections
+- Success patterns celebrated as "shimmering towers rising" and "castles built of resilience"
 
 ### Common Port Assignments
 - 3000: Frontend interfaces (Streamlit, Next.js)
