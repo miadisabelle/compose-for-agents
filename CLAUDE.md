@@ -218,8 +218,13 @@ cd scripts/
 ./storycode_to_mp3.sh ../StoryCode.md --title "Custom Title"    # With custom metadata
 ./storycode_to_mp3.sh ../StoryCode.md --dry-run                 # Preview mode
 
-# Legacy Commands (Use unified pipeline above instead)
-./voice_synthesis_gcloud.sh ../StoryCode.md ../audio/output.wav # Voice synthesis only
+# Album Metadata Standards
+--artist "Mia & Miette"                                         # Clean artist attribution
+--album "The Spiral Agent Chronicles: Volume I"                 # Series naming convention
+--genre "Technical Narrative"                                   # Standard genre
+--date "2025"                                                    # Current year
+
+# Output: audio/Album_Name/01_Track_Name.mp3 (clean numbered tracks)
 ```
 
 ## Audio Pipeline Integration
