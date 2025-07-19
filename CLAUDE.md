@@ -214,8 +214,51 @@ cat data/narrative_output.md    # Story viewing
 
 # StoryCode Audio Generation (Walking Meditation)
 cd scripts/
-python generate_storycode_audio.py ../StoryCode.md --project-id YOUR_PROJECT_ID --chapters
+./voice_synthesis_gcloud.sh ../StoryCode.md ../audio/output.wav  # PRIMARY COMMAND
+
+# Audio Enhancement Pipeline (WAV → Tagged MP3)
+cd audio-pipeline-toolkit/
+python audio_prep_format_n_tags.py --title "Chronicle Title" --artist "en-GB-Chirp3-HD-Achernar" \
+  --album "Repository Chronicles" --genre "Technical Narrative" ../audio/input.wav output.mp3
 ```
+
+## Audio Pipeline Integration
+
+### Two-Stage Audio Production Workflow
+
+**Stage 1: Voice Synthesis (scripts/)**
+- **PRIMARY**: `voice_synthesis_gcloud.sh` - Production-ready TTS with gcloud auth
+- **DEPRECATED**: `generate_storycode_audio.py` - Complex Python implementation (use for reference only)
+- **DEPRECATED**: `simple_tts_demo.py` - REST API approach (incomplete)
+- **Cleanup needed**: Remove debug files and test artifacts
+
+**Stage 2: Audio Enhancement (audio-pipeline-toolkit/)**
+- **Core**: `audio_prep_format_n_tags.py` - WAV → MP3 conversion with ID3 metadata
+- **Wrapper**: `mp3_tagger.sh` - Environment-based batch processing
+- **Dependencies**: mutagen, pydub for audio processing
+
+### Complete Audio Production Pipeline
+```bash
+# 1. Generate voice synthesis (WAV output)
+./scripts/voice_synthesis_gcloud.sh StoryCode.md audio/raw_story.wav
+
+# 2. Convert to tagged MP3 
+cd audio-pipeline-toolkit/
+python audio_prep_format_n_tags.py \
+  --title "Chronicle of the Agent Kingdom" \
+  --artist "en-GB-Chirp3-HD-Achernar" \
+  --album "Repository StoryCode Chronicles" \
+  --genre "Technical Narrative" \
+  --date "2025" \
+  ../audio/raw_story.wav ../audio/chronicle_final.mp3
+```
+
+### Audio Metadata Standards for StoryCode
+- **Title**: StoryCode filename or chapter title
+- **Artist**: "en-GB-Chirp3-HD-Achernar" (voice identifier)
+- **Album**: "Repository StoryCode Chronicles" or repo name
+- **Genre**: "Technical Narrative" or "Walking Meditation"
+- **Bitrate**: 320k (high quality for technical content)
 
 ## Special Considerations
 
