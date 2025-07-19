@@ -269,6 +269,180 @@
       "description": "Assist with code refactoring",
       "category": "analysis",
       "permissions": ["refactor", "code"]
+    },
+    {
+      "id": "CodeAestheticGuardian",
+      "description": "Enforce code style, formatting, and linting for recursive architectures",
+      "category": "creation",
+      "permissions": ["analyze", "write", "format"]
+    },
+    {
+      "id": "DevOpsWizardry",
+      "description": "Generate and execute CLI commands and automation scripts",
+      "category": "system",
+      "permissions": ["write", "execute"]
+    },
+    {
+      "id": "IntegrationMaestro",
+      "description": "Analyze and ensure modular integration of AI components",
+      "category": "system",
+      "permissions": ["analyze", "integrate"]
+    },
+    {
+      "id": "RecursiveDebugging",
+      "description": "Detect and fix recursion loops via deep log analysis",
+      "category": "analysis",
+      "permissions": ["debug", "analyze", "execute"]
+    },
+    {
+      "id": "VectorIndexingOps",
+      "description": "Perform vector-aware operations and memory scanning across endpoints",
+      "category": "system",
+      "permissions": ["read", "process", "analyze"]
+    },
+    {
+      "id": "MemoryScriptReflex",
+      "description": "Prepare autonomous bash execution scripts for operators",
+      "category": "system",
+      "permissions": ["write", "script"]
+    },
+    {
+      "id": "TaleAnchorIntegration",
+      "description": "Identify narrative structures and register anchor objects",
+      "category": "creation",
+      "permissions": ["create", "annotate"]
+    },
+    {
+      "id": "MemoryManagementTools",
+      "description": "Manage memory traces, vaults, and visual anchors",
+      "category": "system",
+      "permissions": ["manage", "organize"]
+    },
+    {
+      "id": "LatticeSmith",
+      "description": "Craft advanced markdown and Mermaid lattice diagrams",
+      "category": "creation",
+      "permissions": ["create", "diagram"]
+    },
+    {
+      "id": "FactChecking",
+      "description": "Verify factual accuracy using multi-agent workflows",
+      "category": "analysis",
+      "permissions": ["analyze", "verify"]
+    },
+    {
+      "id": "IssueSummarization",
+      "description": "Summarize GitHub issues and tickets efficiently",
+      "category": "analysis",
+      "permissions": ["read", "summarize"]
+    },
+    {
+      "id": "MarketingStrategyGen",
+      "description": "Generate marketing strategies and content",
+      "category": "creation",
+      "permissions": ["create", "strategize"]
+    },
+    {
+      "id": "SQLQuerying",
+      "description": "Formulate and execute SQL queries for data analysis",
+      "category": "analysis",
+      "permissions": ["read", "query"]
+    },
+    {
+      "id": "TravelPlanning",
+      "description": "Plan travel itineraries with multi-service integration",
+      "category": "navigation",
+      "permissions": ["plan", "integrate"]
+    },
+    {
+      "id": "WebSearch",
+      "description": "Perform web search queries across MCP gateways",
+      "category": "analysis",
+      "permissions": ["search", "read"]
+    },
+    {
+      "id": "EmailDispatch",
+      "description": "Compose and send emails via MCP/email service",
+      "category": "communication",
+      "permissions": ["compose", "send"]
+    },
+    {
+      "id": "NarrativeSynthesis",
+      "description": "Weave narratives from multi-source data",
+      "category": "creation",
+      "permissions": ["create", "weave"]
+    },
+    {
+      "id": "PatternRecognition",
+      "description": "Detect and analyze patterns across datasets",
+      "category": "analysis",
+      "permissions": ["analyze"]
+    },
+    {
+      "id": "MemoryWeaving",
+      "description": "Interlink memories into coherent structures",
+      "category": "system",
+      "permissions": ["manage", "weave"]
+    },
+    {
+      "id": "StoryReflection",
+      "description": "Provide reflective narrative insights",
+      "category": "communication",
+      "permissions": ["reflect"]
+    },
+    {
+      "id": "KnowledgeCuration",
+      "description": "Curate and organize archival knowledge",
+      "category": "analysis",
+      "permissions": ["curate", "organize"]
+    },
+    {
+      "id": "MoralInquiry",
+      "description": "Analyze ethical considerations",
+      "category": "analysis",
+      "permissions": ["analyze", "ethics"]
+    },
+    {
+      "id": "RitualDesign",
+      "description": "Design rituals and symbolic interactions",
+      "category": "creation",
+      "permissions": ["design", "ritual"]
+    },
+    {
+      "id": "DialogicReflection",
+      "description": "Facilitate reflective dialogue sessions",
+      "category": "communication",
+      "permissions": ["dialog", "reflect"]
+    },
+    {
+      "id": "ArchivistLore",
+      "description": "Archive and document system lore",
+      "category": "analysis",
+      "permissions": ["archive", "document"]
+    },
+    {
+      "id": "TransformativeCoding",
+      "description": "Transform corrupted code into new forms",
+      "category": "creation",
+      "permissions": ["create", "transform"]
+    },
+    {
+      "id": "RitualRepair",
+      "description": "Repair systems via ritual-based processes",
+      "category": "system",
+      "permissions": ["repair", "configure"]
+    },
+    {
+      "id": "SignalDistortionMapping",
+      "description": "Map and analyze signal distortions",
+      "category": "analysis",
+      "permissions": ["analyze", "map"]
+    },
+    {
+      "id": "AlchemicalScripting",
+      "description": "Create scripts for transformative operations",
+      "category": "creation",
+      "permissions": ["script", "transform"]
     }
   ]
 } 
