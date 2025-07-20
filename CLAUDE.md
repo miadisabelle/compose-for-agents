@@ -212,11 +212,14 @@ docker compose logs -f     # System trace analysis
 cat data/narrative_output.md    # Story viewing
 ./run_miette.sh                 # Story weaving execution
 
-# UNIFIED StoryCode to MP3 Pipeline (ONE COMMAND)
+# UNIFIED StoryCode to MP3 Pipeline (ONE COMMAND - REFINED)
 cd scripts/
-./storycode_to_mp3.sh ../StoryCode.md                           # Complete pipeline
-./storycode_to_mp3.sh ../StoryCode.md --title "Custom Title"    # With custom metadata
-./storycode_to_mp3.sh ../StoryCode.md --dry-run                 # Preview mode
+./storycode_to_mp3_refined.sh ../StoryCode.md                           # Complete pipeline (recommended)
+./storycode_to_mp3_refined.sh ../StoryCode.md --artist "Mia & Miette"  # With custom metadata
+./storycode_to_mp3_refined.sh ../StoryCode.md --dry-run                 # Preview mode
+
+# Legacy version (use refined version above)
+./storycode_to_mp3.sh ../StoryCode.md                           # Original version
 
 # Album Metadata Standards
 --artist "Mia & Miette"                                         # Clean artist attribution
