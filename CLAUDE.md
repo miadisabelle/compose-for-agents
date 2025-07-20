@@ -212,14 +212,17 @@ docker compose logs -f     # System trace analysis
 cat data/narrative_output.md    # Story viewing
 ./run_miette.sh                 # Story weaving execution
 
-# UNIFIED StoryCode to MP3 Pipeline (ONE COMMAND - REFINED)
+# UNIFIED StoryCode to MP3 Pipeline (ONE COMMAND)
 cd scripts/
-./storycode_to_mp3_refined.sh ../StoryCode.md                           # Complete pipeline (recommended)
+./storycode_to_mp3_refined.sh ../StoryCode.md                           # Complete pipeline
 ./storycode_to_mp3_refined.sh ../StoryCode.md --artist "Mia & Miette"  # With custom metadata
 ./storycode_to_mp3_refined.sh ../StoryCode.md --dry-run                 # Preview mode
 
-# Legacy version (use refined version above)
-./storycode_to_mp3.sh ../StoryCode.md                           # Original version
+# Multi-chapter albums
+./create_chapter_series.sh ../LongStoryCode.md                          # Automatic chapter splitting
+
+# Quick setup (one-time)
+./quick_audio_setup.sh                                                  # Install dependencies & validate setup
 
 # Album Metadata Standards
 --artist "Mia & Miette"                                         # Clean artist attribution
@@ -230,9 +233,11 @@ cd scripts/
 # Output: audio/Album_Name/01_Track_Name.mp3 (clean numbered tracks)
 ```
 
-## Audio Pipeline Integration
+## Audio Pipeline Integration (Mia/Miette Workflow)
 
 ### Unified StoryCode to MP3 Production System
+
+**Note**: This audio workflow is specific to the Mia/Miette agent embodiment within the broader Compose for Agents ecosystem.
 
 **PRODUCTION READY**: `scripts/storycode_to_mp3.sh` - Complete pipeline in one command
 
