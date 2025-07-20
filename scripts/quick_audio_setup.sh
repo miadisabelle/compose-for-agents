@@ -1,50 +1,76 @@
 #!/bin/bash
-# Quick setup script for StoryCode audio generation
+# Quick setup script for StoryCode audio generation - Updated for refined pipeline
 
 set -e
 
-echo "🎵 Setting up StoryCode Audio Generation..."
+echo "🎵 Setting up StoryCode Audio Generation (Refined Pipeline)..."
 
 # Check if we're in the right directory
-if [ ! -f "../StoryCode.md" ]; then
-    echo "⚠️  Run this script from the scripts/ directory with StoryCode.md in parent directory"
+if [ ! -f "storycode_to_mp3_refined.sh" ]; then
+    echo "⚠️  Run this script from the scripts/ directory"
+    echo "   Expected files: storycode_to_mp3_refined.sh, voice_synthesis_gcloud.sh"
     exit 1
 fi
 
 # Install Python dependencies
 echo "📦 Installing Python dependencies..."
-pip install -r requirements.txt
-
-# Check for Google Cloud credentials
-if [ -z "$GOOGLE_APPLICATION_CREDENTIALS" ]; then
-    echo "⚠️  GOOGLE_APPLICATION_CREDENTIALS environment variable not set"
-    echo "   Please set it to point to your service account JSON file:"
-    echo "   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/credentials.json"
-    echo ""
-    echo "   Or pass --credentials flag to the generation script"
+if [ -f "requirements.txt" ]; then
+    pip install -r requirements.txt
+else
+    echo "Installing core audio dependencies..."
+    pip install mutagen pydub
 fi
 
-# Check for project ID
-if [ -z "$GOOGLE_CLOUD_PROJECT" ]; then
-    echo "⚠️  GOOGLE_CLOUD_PROJECT environment variable not set"
-    echo "   Please set it to your Google Cloud project ID:"
-    echo "   export GOOGLE_CLOUD_PROJECT=your-project-id"
-    echo ""
-    echo "   Or pass --project-id flag to the generation script"
+# Install audio-pipeline-toolkit dependencies
+if [ -f "../audio-pipeline-toolkit/requirements.txt" ]; then
+    echo "📦 Installing audio toolkit dependencies..."
+    pip install -r ../audio-pipeline-toolkit/requirements.txt
+fi
+
+# Check gcloud authentication
+echo "🔐 Checking Google Cloud authentication..."
+if ! command -v gcloud &> /dev/null; then
+    echo "❌ gcloud CLI not found"
+    echo "   Install from: https://cloud.google.com/sdk/docs/install"
+    echo "   Then run: gcloud auth login"
+    exit 1
+fi
+
+if ! gcloud auth list --filter=status:ACTIVE --format="value(account)" | grep -q .; then
+    echo "❌ No active gcloud authentication found"
+    echo "   Please run: gcloud auth login"
+    exit 1
+fi
+
+# Check project configuration
+PROJECT_ID=$(gcloud config list --format='value(core.project)')
+if [ -z "$PROJECT_ID" ]; then
+    echo "❌ No project ID configured"
+    echo "   Please run: gcloud config set project YOUR_PROJECT_ID"
+    exit 1
+else
+    echo "✅ Using project: $PROJECT_ID"
 fi
 
 # Create audio output directory
 mkdir -p ../audio
 
+# Make scripts executable
+chmod +x storycode_to_mp3_refined.sh voice_synthesis_gcloud.sh
+if [ -f "create_chapter_series.sh" ]; then
+    chmod +x create_chapter_series.sh
+fi
+
 echo "✅ Setup complete!"
 echo ""
-echo "🚀 To generate audio from StoryCode.md:"
-echo "   python generate_storycode_audio.py ../StoryCode.md --project-id YOUR_PROJECT_ID"
+echo "🚀 To generate audio from any StoryCode file:"
+echo "   ./storycode_to_mp3_refined.sh ../StoryCode.md"
 echo ""
-echo "📖 Or for the repository chronicle specifically:"
-echo "   python generate_storycode_audio.py ../StoryCode.md \\"
-echo "     --project-id top-moment-465521-v9 \\"
-echo "     --output-dir ../audio \\"
-echo "     --chapters"
+echo "🎨 With custom metadata:"
+echo "   ./storycode_to_mp3_refined.sh ../StoryCode.md --artist \"Your Name\" --album \"Your Album\""
+echo ""
+echo "📚 For multi-chapter series:"
+echo "   ./create_chapter_series.sh ../LongStoryCode.md"
 echo ""
 echo "🎧 Audio files will be created in ../audio/ directory"
+echo "📖 See AUDIO_WORKFLOW_PROCEDURE.md for complete guide"

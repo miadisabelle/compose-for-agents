@@ -38,25 +38,33 @@ mkdir -p "$(dirname "$OUTPUT_FILE")"
 echo "📖 Reading: $INPUT_FILE"
 echo "🎧 Output: $OUTPUT_FILE"
 
-# Extract and clean text from markdown
+# Extract and clean text from markdown with improved TTS optimization
 TEXT_CONTENT=$(cat "$INPUT_FILE" | \
-    # Remove markdown headers
+    # Remove markdown headers but keep content
     sed 's/^#\+\s*//g' | \
-    # Remove markdown bold/italic
+    # Remove markdown formatting
     sed 's/\*\*\([^*]*\)\*\*/\1/g' | \
     sed 's/\*\([^*]*\)\*/\1/g' | \
-    # Remove code blocks
-    sed 's/`\([^`]*\)`/ \1 /g' | \
-    # Handle technical terms
-    sed 's/\.md\b/ dot markdown/g' | \
-    sed 's/\.py\b/ dot pie/g' | \
+    # Convert code blocks to speech-friendly format
+    sed 's/`\([^`]*\)`/ code \1 /g' | \
+    # Improve technical term pronunciation
+    sed 's/\.md\b/ dot M D file/g' | \
+    sed 's/\.py\b/ dot Python file/g' | \
+    sed 's/\.sh\b/ dot shell script/g' | \
+    sed 's/\.mp3\b/ dot M P 3 file/g' | \
     sed 's/\bAPI\b/A P I/g' | \
-    sed 's/\bCLI\b/C L I/g' | \
+    sed 's/\bCLI\b/command line interface/g' | \
+    sed 's/\bMP3\b/M P 3/g' | \
+    sed 's/\bTTS\b/text to speech/g' | \
+    sed 's/\bID3\b/I D 3/g' | \
     sed 's/--\([a-zA-Z-]*\)/ dash dash \1/g' | \
-    # Clean up extra whitespace
-    tr -s ' ' | \
-    # Limit length for API
-    head -c 4500
+    # Convert technical punctuation
+    sed 's/&/and/g' | \
+    sed 's/@/ at /g' | \
+    # Clean up extra whitespace and newlines
+    tr '\n' ' ' | tr -s ' ' | \
+    # Limit length for API with safety margin
+    head -c 4000
 )
 
 # Escape text for JSON
@@ -64,8 +72,22 @@ JSON_TEXT=$(echo "$TEXT_CONTENT" | jq -Rs .)
 
 echo "🔄 Generating audio with Google Cloud TTS..."
 
-# Make the API call
-curl -X POST -H "Content-Type: application/json" \
+# Validate text length before API call
+TEXT_LENGTH=${#TEXT_CONTENT}
+echo "📏 Text length: $TEXT_LENGTH characters"
+
+if [ $TEXT_LENGTH -lt 10 ]; then
+    echo "❌ Text content too short ($TEXT_LENGTH chars). Check input file."
+    exit 1
+fi
+
+if [ $TEXT_LENGTH -gt 4000 ]; then
+    echo "⚠️  Text content long ($TEXT_LENGTH chars). May hit API limits."
+fi
+
+# Make the API call with improved error handling
+echo "🔄 Calling Google Cloud TTS API..."
+API_RESPONSE=$(curl -s -X POST -H "Content-Type: application/json" \
 -H "X-Goog-User-Project: $PROJECT_ID" \
 -H "Authorization: Bearer $(gcloud auth print-access-token)" \
 --data "{
@@ -80,19 +102,38 @@ curl -X POST -H "Content-Type: application/json" \
     \"audioEncoding\": \"LINEAR16\",
     \"speakingRate\": 0.9,
     \"pitch\": 0.0,
-    \"volumeGainDb\": 0.0
+    \"volumeGainDb\": 0.0,
+    \"sampleRateHertz\": 24000
   }
-}" "https://texttospeech.googleapis.com/v1/text:synthesize" | \
-jq -r '.audioContent' | base64 --decode > "$OUTPUT_FILE"
+}" "https://texttospeech.googleapis.com/v1/text:synthesize")
 
-if [ $? -eq 0 ] && [ -f "$OUTPUT_FILE" ] && [ -s "$OUTPUT_FILE" ]; then
-    echo "✅ Audio generated successfully!"
-    echo "🎧 File: $OUTPUT_FILE"
-    echo "🚶 Ready for walking meditation!"
-    
-    # Show file info
-    ls -lh "$OUTPUT_FILE"
-else
-    echo "❌ Audio generation failed"
+# Check for API errors
+if echo "$API_RESPONSE" | jq -e '.error' > /dev/null 2>&1; then
+    echo "❌ API Error:"
+    echo "$API_RESPONSE" | jq -r '.error.message'
     exit 1
 fi
+
+# Extract and decode audio content
+echo "$API_RESPONSE" | jq -r '.audioContent' | base64 --decode > "$OUTPUT_FILE"
+
+# Validate output file
+if [ ! -f "$OUTPUT_FILE" ]; then
+    echo "❌ Output file was not created"
+    exit 1
+fi
+
+FILE_SIZE=$(stat -f%z "$OUTPUT_FILE" 2>/dev/null || stat -c%s "$OUTPUT_FILE" 2>/dev/null || echo "0")
+if [ "$FILE_SIZE" -lt 1000 ]; then
+    echo "❌ Output file too small ($FILE_SIZE bytes). Likely an error occurred."
+    echo "💡 Try simplifying the input text or removing special characters."
+    exit 1
+fi
+
+echo "✅ Audio generated successfully!"
+echo "🎧 File: $OUTPUT_FILE"
+echo "📊 Size: $(du -h "$OUTPUT_FILE" | cut -f1)"
+echo "🚶 Ready for walking meditation!"
+
+# Show file info
+ls -lh "$OUTPUT_FILE"

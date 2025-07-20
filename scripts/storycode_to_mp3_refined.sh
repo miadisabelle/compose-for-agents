@@ -51,16 +51,33 @@ validate_content() {
     
     log_info "Content validation: $char_count characters"
     
-    if [ "$char_count" -gt 4500 ]; then
-        log_error "Content too long ($char_count chars). TTS limit is ~4500 chars."
+    if [ "$char_count" -gt 4000 ]; then
+        log_error "Content too long ($char_count chars). TTS limit is ~4000 chars for safety."
         echo "Consider splitting into chapters or simplifying content."
+        echo "Tip: Use create_chapter_series.sh for long content"
         exit 1
     fi
     
-    # Check for problematic characters that cause TTS issues
+    if [ "$char_count" -lt 10 ]; then
+        log_error "Content too short ($char_count chars). Check input file."
+        exit 1
+    fi
+    
+    # Check for problematic content patterns
+    local issues=()
     if grep -q '`' "$input_file"; then
-        log_info "Found backticks - these sometimes cause TTS issues"
-        log_info "Consider removing code blocks if generation fails"
+        issues+=("backticks (code blocks)")
+    fi
+    if grep -q '&' "$input_file"; then
+        issues+=("ampersands")
+    fi
+    if grep -q '@' "$input_file"; then
+        issues+=("at symbols")
+    fi
+    
+    if [ ${#issues[@]} -gt 0 ]; then
+        log_info "Found potentially problematic characters: ${issues[*]}"
+        log_info "These will be converted for better TTS pronunciation"
     fi
 }
 
@@ -131,26 +148,47 @@ main() {
         exit 1
     fi
     
-    # Check if WAV is valid (not empty 3-byte file)
+    # Validate WAV output thoroughly
+    if [ ! -f "$wav_temp" ]; then
+        log_error "Voice synthesis did not create output file"
+        exit 1
+    fi
+    
     local wav_size=$(stat -f%z "$wav_temp" 2>/dev/null || stat -c%s "$wav_temp" 2>/dev/null || echo "0")
     if [ "$wav_size" -lt 1000 ]; then
         log_error "Voice synthesis produced empty/invalid file ($wav_size bytes)"
-        log_error "This usually means content exceeded TTS limits or contained problematic characters"
+        log_error "Common causes:"
+        log_error "  - Content exceeded TTS character limits"
+        log_error "  - Special characters caused API parsing errors"
+        log_error "  - Network/authentication issues"
+        log_error "  - Input file formatting problems"
         rm -f "$wav_temp"
         exit 1
     fi
     
-    # Stage 2: Convert to MP3
+    log_info "WAV validation passed: $(du -h "$wav_temp" | cut -f1)"
+    
+    # Stage 2: Convert to MP3 with enhanced error handling
     log_info "Stage 2: Converting to tagged MP3"
+    local title=$(basename "$input_file" .md | sed 's/_/ /g; s/Chapter [0-9]\+ //; s/^[0-9]\+_//')
+    
     if ! python ../audio-pipeline-toolkit/audio_prep_format_n_tags.py \
-        --title "$(basename "$input_file" .md | sed 's/_/ /g')" \
+        --title "$title" \
         --artist "$artist" \
         --album "$album" \
         --genre "$DEFAULT_GENRE" \
         --date "$(date +%Y)" \
         --bitrate "$DEFAULT_BITRATE" \
-        "$wav_temp" "$output_file"; then
+        "$wav_temp" "$output_file" 2>/dev/null; then
         log_error "MP3 conversion failed"
+        log_error "Check that python and required libraries (mutagen, pydub) are installed"
+        rm -f "$wav_temp"
+        exit 1
+    fi
+    
+    # Verify MP3 output
+    if [ ! -f "$output_file" ] || [ ! -s "$output_file" ]; then
+        log_error "MP3 file was not created or is empty"
         rm -f "$wav_temp"
         exit 1
     fi
