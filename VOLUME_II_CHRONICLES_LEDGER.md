@@ -9,25 +9,25 @@
 ### 🚨 **Critical Problems Identified**
 
 #### 1. **Documentation Duplication Crisis**
-- **Files**: `AUDIO_WORKFLOW_PROCEDURE.md` (124 lines) vs `STORYCODE_AUDIO_QUICKSTART.md` (51 lines)
+- **Files**: [AUDIO_WORKFLOW_PROCEDURE.md](AUDIO_WORKFLOW_PROCEDURE.md) (124 lines) vs [STORYCODE_AUDIO_QUICKSTART.md](STORYCODE_AUDIO_QUICKSTART.md) (51 lines)
 - **Problem**: Significant overlap, confusing for agents, maintenance nightmare
 - **Impact**: Agents don't know which to follow, outdated information spreads
 
 #### 2. **Relative Path Chaos**
 - **Problem**: Instructions say `cd scripts/` but agents are scattered across:
-  - `a2a/`, `adk/`, `agno/`, `crew-ai/`, `langgraph/`, `spring-ai/`, `mia/`, `miette/`
+  - [a2a/](a2a/), [adk/](adk/), [agno/](agno/), [crew-ai/](crew-ai/), [langgraph/](langgraph/), [spring-ai/](spring-ai/), [mia/](mia/), [miette/](miette/)
 - **Impact**: Agent in `agno/` directory following `cd scripts/` would break
 - **Need**: Absolute paths or context-aware instructions
 
 #### 3. **File Naming Anarchy (Prophetic User Warning)**
 - **Current Mess**: 6 different StoryCode files with unclear purposes:
-  - `StoryCode.md`, `StoryCode_AudioPipeline_Consolidation.md`, `StoryCode_Generation_Protocol.md`
-  - `StoryCode_Speech_Optimization.md`, `StoryCode_VoiceSynthesis.md`, `StoryCode_VoiceSynthesis_Short.md`
+  - [StoryCode.md](StoryCode.md), [StoryCode_AudioPipeline_Consolidation.md](StoryCode_AudioPipeline_Consolidation.md), [StoryCode_Generation_Protocol.md](StoryCode_Generation_Protocol.md)
+  - [StoryCode_Speech_Optimization.md](StoryCode_Speech_Optimization.md), [StoryCode_VoiceSynthesis.md](StoryCode_VoiceSynthesis.md), [StoryCode_VoiceSynthesis_Short.md](StoryCode_VoiceSynthesis_Short.md)
 - **User's Warning**: "That opens door to a very messy ways of naming files"
 - **Impact**: Impossible to know which is template vs example vs source
 
 #### 4. **Source Traceability Blackhole**
-- **Discovery**: Volume I came from `StoryCode_AudioPipeline_Consolidation.md`
+- **Discovery**: Volume I came from [StoryCode_AudioPipeline_Consolidation.md](StoryCode_AudioPipeline_Consolidation.md)
 - **Problem**: No metadata linking audio output to source markdown
 - **Impact**: User had to guess: "which might be related to what we did or that was other agents"
 - **Missing**: JSON manifest linking audio ↔ source ↔ metadata
@@ -37,7 +37,7 @@
 - **Missing**: Clear integration points, service discovery, capability advertisement
 
 #### 6. **Scattered Artifacts**
-- **Found**: `temp_chapters/` (8 files), test files (`test_*.wav`, `test_*.md`)
+- **Found**: [temp_chapters/](temp_chapters/) (8 files), test files (test_*.wav, test_*.md)
 - **Problem**: Development artifacts confuse production usage
 
 ## 🎭 **Volume II Chronicle Structure**
@@ -55,7 +55,7 @@
 *Agents from distant kingdoms (a2a, agno, crew-ai) attempt to follow the audio workflow but get lost in relative path confusion.*
 
 ### **Chapter 3**: "The Archaeological Discovery"
-*Investigation reveals Volume I's true source: `StoryCode_AudioPipeline_Consolidation.md`. But this raises deeper questions about traceability.*
+*Investigation reveals Volume I's true source: [StoryCode_AudioPipeline_Consolidation.md](StoryCode_AudioPipeline_Consolidation.md). But this raises deeper questions about traceability.*
 
 ### **Chapter 4**: "The Vision of the JSON Manifest"
 *A proposal emerges: What if every audio generation created a manifest linking source, metadata, and output? Structure for clarity.*
@@ -89,15 +89,15 @@
 ## 📊 **Expected Deliverables**
 
 ### **Documentation Artifacts**:
-- `UNIFIED_AUDIO_WORKFLOW.md` (replaces both AUDIO_WORKFLOW_PROCEDURE.md and STORYCODE_AUDIO_QUICKSTART.md)
-- `AUDIO_SOURCE_MANIFEST_SPEC.md` (JSON schema for traceability)
+- [UNIFIED_AUDIO_WORKFLOW.md](UNIFIED_AUDIO_WORKFLOW.md) (replaces both [AUDIO_WORKFLOW_PROCEDURE.md](AUDIO_WORKFLOW_PROCEDURE.md) and [STORYCODE_AUDIO_QUICKSTART.md](STORYCODE_AUDIO_QUICKSTART.md))
+- [AUDIO_SOURCE_MANIFEST_SPEC.md](AUDIO_SOURCE_MANIFEST_SPEC.md) (JSON schema for traceability)
 - Audio Generation Manifest (JSON file linking source to output)
 
 ### **Volume II Audio**:
 - Album: "The Spiral Agent Chronicles: Volume II"
 - Chapters: Prologue + 3-4 chapters + Epilogue
-- Output: `audio/The_Spiral_Agent_Chronicles_Volume_II/`
-- Source Manifest: `audio/The_Spiral_Agent_Chronicles_Volume_II/source_manifest.json`
+- Output: [audio/The_Spiral_Agent_Chronicles_Volume_II/](audio/The_Spiral_Agent_Chronicles_Volume_II/)
+- Source Manifest: [source_manifest.json](audio/The_Spiral_Agent_Chronicles_Volume_II/source_manifest.json)
 
 ### **System Improvements**:
 - Context-aware path resolution
