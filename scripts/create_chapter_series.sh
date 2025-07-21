@@ -110,13 +110,13 @@ generate_chapter_mp3s() {
         echo "🎧 Creating Chapter $chapter_num: $chapter_title"
         
         # Use refined pipeline for better reliability
-        if [ -x "./storycode_to_mp3_refined.sh" ]; then
-            ./storycode_to_mp3_refined.sh "$chapter_file" \
+        if [ -x "$(dirname "$0")/storycode_to_mp3_refined.sh" ]; then
+            "$(dirname "$0")/storycode_to_mp3_refined.sh" "$chapter_file" \
                 --artist "$ARTISTS" \
                 --album "$ALBUM_TITLE"
         else
             # Fallback to original script
-            ./storycode_to_mp3.sh "$chapter_file" "$output_file" \
+            "$(dirname "$0")/storycode_to_mp3.sh" "$chapter_file" "$output_file" \
                 --title "$chapter_title" \
                 --artist "$ARTISTS" \
                 --album "$ALBUM_TITLE" \

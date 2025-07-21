@@ -143,7 +143,7 @@ main() {
     
     # Stage 1: Voice synthesis
     log_info "Stage 1: Voice synthesis"
-    if ! ./voice_synthesis_gcloud.sh "$input_file" "$wav_temp"; then
+    if ! "$(dirname "$0")"/voice_synthesis_gcloud.sh "$input_file" "$wav_temp"; then
         log_error "Voice synthesis failed"
         exit 1
     fi
@@ -172,7 +172,7 @@ main() {
     log_info "Stage 2: Converting to tagged MP3"
     local title=$(basename "$input_file" .md | sed 's/_/ /g; s/Chapter [0-9]\+ //; s/^[0-9]\+_//')
     
-    if ! python ../audio-pipeline-toolkit/audio_prep_format_n_tags.py \
+    if ! python3 ../audio-pipeline-toolkit/audio_prep_format_n_tags.py \
         --title "$title" \
         --artist "$artist" \
         --album "$album" \
