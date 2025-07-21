@@ -172,14 +172,7 @@ main() {
     log_info "Stage 2: Converting to tagged MP3"
     local title=$(basename "$input_file" .md | sed 's/_/ /g; s/Chapter [0-9]\+ //; s/^[0-9]\+_//')
     
-    if ! python3 ../audio-pipeline-toolkit/audio_prep_format_n_tags.py \
-        --title "$title" \
-        --artist "$artist" \
-        --album "$album" \
-        --genre "$DEFAULT_GENRE" \
-        --date "$(date +%Y)" \
-        --bitrate "$DEFAULT_BITRATE" \
-        "$wav_temp" "$output_file" 2>/dev/null; then
+    if ! python3 "$(dirname "$0")"/../audio-pipeline-toolkit/audio_prep_format_n_tags.py \         --title "$title"         --artist "$artist"         --album "$album"         --genre "$DEFAULT_GENRE"         --date "$(date +%Y)"         --bitrate "$DEFAULT_BITRATE"         "$wav_temp" "$output_file"; then
         log_error "MP3 conversion failed"
         log_error "Check that python and required libraries (mutagen, pydub) are installed"
         rm -f "$wav_temp"
