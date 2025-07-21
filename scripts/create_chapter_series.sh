@@ -54,7 +54,7 @@ extract_chapters() {
         chars = length($0) + 1
         next
     }
-    { 
+    {
         content = content $0 "\n" 
         chars += length($0) + 1
     }
@@ -93,6 +93,8 @@ extract_chapters() {
 generate_chapter_mp3s() {
     local temp_dir="$1"
     local output_dir="$2"
+    local album_title="$3"
+    local artist_name="$4"
     
     mkdir -p "$output_dir"
     
@@ -112,8 +114,8 @@ generate_chapter_mp3s() {
         # Use refined pipeline for better reliability
         if [ -x "$(dirname "$0")/storycode_to_mp3_refined.sh" ]; then
             "$(dirname "$0")/storycode_to_mp3_refined.sh" "$chapter_file" \
-                --artist "$ARTISTS" \
-                --album "$ALBUM_TITLE"
+                --artist "$artist_name" \
+                --album "$album_title"
         else
             # Fallback to original script
             "$(dirname "$0")/storycode_to_mp3.sh" "$chapter_file" "$output_file" \
@@ -141,6 +143,21 @@ main() {
     local temp_dir="../temp_chapters"
     local output_dir
     
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --artist) artist="$2"; shift 2 ;;
+            --album) album="$2"; shift 2 ;;
+            --help) show_usage; exit 0 ;;
+            -*) echo "Unknown option: $1"; show_usage; exit 1 ;;
+            *) input_file="$1"; shift ;;
+        esac
+    done
+
+    # Set global variables from parsed arguments
+    ARTISTS="$artist"
+    ALBUM_TITLE="$album"
+
     # Default input if not provided
     if [ -z "$input_file" ]; then
         input_file="../StoryCode_AudioPipeline_Consolidation.md"
@@ -152,15 +169,8 @@ main() {
         exit 1
     fi
     
-    # Generate output directory from input filename
-    local base_name=$(basename "$input_file" .md)
-    output_dir="../audio/$(echo "$base_name" | sed 's/[^a-zA-Z0-9]/_/g')"
-    
-    # Update album title based on input file
-    if [[ "$input_file" != *"AudioPipeline_Consolidation"* ]]; then
-        ALBUM_TITLE="$(echo "$base_name" | sed 's/_/ /g'): Audio Series"
-    fi
-    
+    local output_dir="../audio/$(echo "$album" | sed 's/[^a-zA-Z0-9 ]//g; s/ /_/g')"
+
     echo "📖 Processing: $input_file"
     echo "📁 Output directory: $output_dir"
     echo ""
@@ -169,7 +179,7 @@ main() {
     extract_chapters "$input_file" "$temp_dir"
     
     # Generate MP3s
-    generate_chapter_mp3s "$temp_dir" "$output_dir"
+    generate_chapter_mp3s "$temp_dir" "$output_dir" "$album" "$artist"
     
     # Optional cleanup (keep chapters for debugging if needed)
     echo "🧹 Cleaning up temporary files..."
@@ -190,8 +200,8 @@ main() {
         done
     fi
     echo ""
-    echo "🎧 Album: $ALBUM_TITLE"
-    echo "👥 Artists: $ARTISTS"
+    echo "🎧 Album: $album"
+    echo "👥 Artists: $artist"
     echo "🏷️  Genre: $GENRE"
     echo "📅 Date: $DATE"
     echo ""

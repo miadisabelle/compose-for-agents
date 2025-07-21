@@ -3,7 +3,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install ffmpeg
-RUN apt-get update && apt-get install -y ffmpeg     && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y ffmpeg     && rm -rf /var/lib/apt/lists/*ENV FFMPEG_PATH="/usr/bin/ffmpeg"ENV FFPROBE_PATH="/usr/bin/ffprobe"
 
 RUN pip install poetry
 

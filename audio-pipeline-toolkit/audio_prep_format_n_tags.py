@@ -17,6 +17,10 @@ try:
     from mutagen.id3 import ID3, ID3NoHeaderError
     from mutagen.mp3 import MP3
     from pydub import AudioSegment
+except ImportError as e:
+    print(f"Error: Required audio library not found: {e}")
+    print("Install with: pip install mutagen pydub")
+    sys.exit(1)
 
 def convert_to_mp3(input_file, output_file, bitrate='320k'):
     """Convert audio file to MP3 with error handling"""
@@ -106,7 +110,9 @@ Examples:
   %(prog)s audio.wav --save --album "Chronicles Vol I"
         """
     )
-    parser.add_argument('input_file', help='Input audio file (WAV or other formats)')
+    parser.add_argument('--input-file', help='Input audio file (WAV or other formats)')
+    parser.add_argument('--output-file', help='Output MP3 file (required unless --save used)')
+    parser.add_argument('input_file', nargs='?', help='Input audio file (WAV or other formats)')
     parser.add_argument('output_file', nargs='?', help='Output MP3 file (required unless --save used)', default=None)
     parser.add_argument('--save', action='store_true', help='Modify input file in-place (input must be MP3)')
     parser.add_argument('--title', help='Title tag')
