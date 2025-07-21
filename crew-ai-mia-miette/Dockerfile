@@ -23,7 +23,7 @@ else
     export OPENAI_MODEL_NAME=openai/\${MODEL_RUNNER_MODEL}
     export OPENAI_API_KEY=cannot_be_empty
 fi
-exec poetry run marketing_posts
+exec poetry run audio_weaver
 EOF
 RUN chmod +x /entrypoint.sh
 CMD ["/entrypoint.sh"]
