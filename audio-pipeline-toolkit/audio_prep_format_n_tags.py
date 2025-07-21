@@ -17,15 +17,15 @@ try:
     from mutagen.id3 import ID3, ID3NoHeaderError
     from mutagen.mp3 import MP3
     from pydub import AudioSegment
-from pydub.utils import get_prober_name, get_converter_name
-
-# Explicitly set ffmpeg and ffprobe paths
-AudioSegment.converter = get_converter_name("ffmpeg")
-AudioSegment.prober = get_prober_name("ffprobe")
+    from pydub.utils import get_prober_name, get_converter_name
 except ImportError as e:
     print(f"Error: Required audio library not found: {e}")
     print("Install with: pip install mutagen pydub")
     sys.exit(1)
+
+# Explicitly set ffmpeg and ffprobe paths
+AudioSegment.converter = get_converter_name("ffmpeg")
+AudioSegment.prober = get_prober_name("ffprobe")
 
 def convert_to_mp3(input_file, output_file, bitrate='320k'):
     """Convert audio file to MP3 with error handling"""
