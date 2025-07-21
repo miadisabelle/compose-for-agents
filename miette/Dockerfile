@@ -13,5 +13,6 @@ COPY agents/ ./agents
 RUN poetry install --only main
 RUN pip install mutagen pydub
 RUN python -c "import mutagen, pydub; print('Mutagen and Pydub are installed!')"
+RUN echo "PATH: $PATH"
 
 CMD ["poetry", "run", "python", "-m", "agents.agent"]
