@@ -223,7 +223,7 @@ cd scripts/
 # Multi-chapter albums
 ./create_chapter_series.sh ../LongStoryCode.md                          # Automatic chapter splitting
 
-# Quick setup (one-time)
+# Quick setup (one-time) 
 ./quick_audio_setup.sh                                                  # Install dependencies & validate setup
 
 # Album Metadata Standards
@@ -237,57 +237,36 @@ cd scripts/
 
 ## Audio Pipeline Integration (Mia/Miette Workflow)
 
-### Unified StoryCode to MP3 Production System
+### Complete Workflow Guide
 
-**Note**: This audio workflow is specific to the Mia/Miette agent embodiment within the broader Compose for Agents ecosystem.
+**For detailed instructions**, see [UNIFIED_AUDIO_WORKFLOW.md](./UNIFIED_AUDIO_WORKFLOW.md) - the definitive guide for StoryCode → Professional MP3 audio generation.
 
-**PRODUCTION READY**: `scripts/storycode_to_mp3.sh` - Complete pipeline in one command
-
-**Architecture**: Two-stage integrated workflow
-1. **Voice Synthesis**: StoryCode.md → WAV (via gcloud TTS + en-GB-Chirp3-HD-Achernar)
-2. **Audio Enhancement**: WAV → Tagged MP3 (via audio-pipeline-toolkit)
-
-**Features**:
-- ✅ **One Command**: Complete StoryCode → Professional MP3
-- ✅ **Smart Defaults**: Auto-generates titles, metadata, output filenames
-- ✅ **Customizable**: All metadata fields configurable via command line
-- ✅ **Error Handling**: Dependency checks, validation, cleanup
-- ✅ **Dry Run Mode**: Preview without execution
+**Key Features**:
+- ✅ **Context-Aware Usage**: Works from any agent directory (agno/, a2a/, crew-ai/, etc.)
+- ✅ **One-Command Operation**: Complete StoryCode → Professional MP3 pipeline
+- ✅ **Multi-Chapter Support**: Automatic chapter splitting for long content
+- ✅ **Source Traceability**: JSON manifest system tracks audio back to source
 - ✅ **Professional Output**: 160kbps MP3 with ID3v2.4.0 metadata
+- ✅ **Robust Error Handling**: Content validation, dependency checking, comprehensive troubleshooting
 
-### Usage Examples
+**Quick Reference**:
 ```bash
-# Simple conversion (auto-generates everything)
-./storycode_to_mp3.sh ../StoryCode.md
+# From any directory in the repository
+cd /a/src/compose-for-agents/scripts/
 
-# Custom title and output location
-./storycode_to_mp3.sh ../StoryCode.md ../audio/my_story.mp3 --title "My Technical Tale"
+# Single story
+./storycode_to_mp3_refined.sh /path/to/story.md --artist "Name" --album "Album"
 
-# Full metadata customization
-./storycode_to_mp3.sh ../StoryCode.md \
-  --title "Chronicle of the Agent Kingdom" \
-  --artist "en-GB-Chirp3-HD-Achernar" \
-  --album "Repository Chronicles" \
-  --genre "Walking Meditation" \
-  --date "2025"
+# Multi-chapter series  
+./create_chapter_series.sh /path/to/long_story.md --artist "Name" --album "Series"
 
-# Preview mode (shows what would be done)
-./storycode_to_mp3.sh ../StoryCode.md --dry-run
+# One-time setup
+./quick_audio_setup.sh
 ```
 
-### Audio Metadata Standards for StoryCode
-- **Title**: Auto-derived from filename or custom via `--title`
-- **Artist**: "en-GB-Chirp3-HD-Achernar" (voice identifier)
-- **Album**: "Repository StoryCode Chronicles" (default) or custom via `--album`
-- **Genre**: "Technical Narrative" (default) or "Walking Meditation"
-- **Date**: Current year (auto) or custom via `--date`
-- **Bitrate**: 320k input → 160kbps optimized output
-- **Format**: MP3 with ID3v2.4.0 metadata, 24kHz, Monaural
+### Integration with Broader Ecosystem
 
-### Legacy Components (Now Integrated)
-- `voice_synthesis_gcloud.sh` - Integrated as Stage 1
-- `audio-pipeline-toolkit/` - Integrated as Stage 2
-- Dependencies: gcloud, jq, mutagen, pydub
+This audio workflow is specific to the Mia/Miette agent embodiment system but designed to work seamlessly across the entire Compose for Agents ecosystem. See the unified workflow guide for context-aware usage from different agent directories.
 
 ## Special Considerations
 
