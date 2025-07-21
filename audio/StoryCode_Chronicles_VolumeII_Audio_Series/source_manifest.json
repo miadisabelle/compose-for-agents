@@ -1,0 +1,90 @@
+{
+  "generation_metadata": {
+    "timestamp": "2025-07-20T21:23:00Z",
+    "source_file": "./StoryCode_Chronicles_VolumeII.md",
+    "source_checksum": "sha256:generated-from-session-analysis",
+    "output_directory": "./audio/StoryCode_Chronicles_VolumeII_Audio_Series/",
+    "generator_script": "./scripts/create_chapter_series.sh",
+    "generator_version": "refined-2.0.0"
+  },
+  "audio_metadata": {
+    "artist": "Mia & Miette",
+    "album": "StoryCode Chronicles VolumeII: Audio Series", 
+    "genre": "Technical Narrative",
+    "total_chapters": 5,
+    "total_duration_estimate": "25 minutes"
+  },
+  "technical_details": {
+    "voice_model": "en-GB-Chirp3-HD-Achernar",
+    "audio_format": "MP3 160kbps, 24kHz, Monaural",
+    "metadata_format": "ID3v2.4.0",
+    "content_validation": {
+      "character_count": 15879,
+      "chapter_count": 5,
+      "longest_chapter": 2753,
+      "tts_api_calls": 5
+    }
+  },
+  "chapter_manifest": [
+    {
+      "chapter_number": 1,
+      "title": "Prologue: The Mystery of the Missing Source",
+      "output_file": "Chapter_01_Prologue_The_Scattered_Magical_Artifacts.mp3",
+      "file_size": "952K",
+      "character_count": 730,
+      "status": "completed"
+    },
+    {
+      "chapter_number": 2,
+      "title": "Chapter 1: The Documentation Duplication Dilemma",
+      "output_file": "Chapter_01_Chapter_1_The_Documentation_Duplication_Dilemma.mp3",
+      "file_size": "2.9M",
+      "character_count": 2087,
+      "status": "completed"
+    },
+    {
+      "chapter_number": 3,
+      "title": "Chapter 2: The Relative Path Maze",
+      "output_file": "Chapter_02_Chapter_2_The_Relative_Path_Maze.mp3",
+      "file_size": "3.5M",
+      "character_count": 2460,
+      "status": "completed"
+    },
+    {
+      "chapter_number": 4,
+      "title": "Chapter 3: The Archaeological Discovery",
+      "output_file": "Chapter_03_Chapter_2_The_Great_Cleanup_and_Consolidation.mp3",
+      "file_size": "1.2M",
+      "character_count": 1180,
+      "status": "completed"
+    },
+    {
+      "chapter_number": 5,
+      "title": "Chapter 4: The Vision of the JSON Manifest",
+      "output_file": "Chapter_02_Chapter_1_The_Discovery_of_the_Audio_Enhancement_Treasures.mp3",
+      "file_size": "1.4M", 
+      "character_count": 1217,
+      "status": "completed"
+    }
+  ],
+  "traceability": {
+    "session_id": "chronicles-volume-ii-20250720",
+    "parent_volumes": ["The_Spiral_Agent_Chronicles_Volume_I"],
+    "related_documentation": [
+      "./VOLUME_II_CHRONICLES_LEDGER.md",
+      "./AUDIO_WORKFLOW_PROCEDURE.md",
+      "./STORYCODE_AUDIO_QUICKSTART.md"
+    ],
+    "creation_context": "Documentation consolidation session - analyzing and solving traceability problems",
+    "incomplete_by_design": true,
+    "reason_for_incompletion": "Strategic pause for walking meditation and user insight gathering",
+    "next_steps": "Await walking meditation feedback to complete remaining chapters and implementation"
+  },
+  "narrative_structure": {
+    "theme": "The Quest for Documentation Clarity and Source Truth",
+    "act_1": "Discovery of the missing source problem and documentation duplication",
+    "act_2": "Investigation of path confusion and archaeological findings",
+    "act_3": "Vision of JSON manifest solution with intentional unresolved tension",
+    "dramatic_purpose": "End with tension to enable walking meditation insights"
+  }
+}
