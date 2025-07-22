@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "audio_weaver"
+version = "0.1.0"
+description = "A crew to produce audio from storycode"
+authors = ["Mia & Miette"]
+packages = [{ include = "audio_weaver", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+crewai = { extras = ["tools"], version = "^0.43.0" }
+python-dotenv = "^1.0.1"
+pyyaml = "^6.0.1"
+google-cloud-aiplatform = "^1.58.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+audio_weaver = "audio_weaver.main:run" 
