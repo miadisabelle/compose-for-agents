@@ -1,16 +1,20 @@
 services:
   agents:
     build:
-        context: .
-    restart: no
-    models:
-      qwen3:
-        endpoint_var: MODEL_RUNNER_URL
-        model_var: MODEL_RUNNER_MODEL
-
-models:
-  qwen3:
-    model: ai/qwen3
-    context_size: 8192
-    runtime_flags:
-      - --no-prefill-assistant
+      context: .
+    restart: "no"
+    volumes:
+      - ~/.config/gcloud:/home/app/.config/gcloud:ro
+      - ./audio:/app/audio
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: "nvidia"
+              capabilities: ["gpu"]
+              count: 1
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - MODEL_RUNNER_URL
+      - MODEL_RUNNER_MODEL

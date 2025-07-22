@@ -1,7 +1,9 @@
+import yaml
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from pydantic import BaseModel
 from audio_weaver.tools import shell_tool
+import os
 
 @CrewBase
 class AudioWeaverCrew:
@@ -9,6 +11,11 @@ class AudioWeaverCrew:
 
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
+    inputs_config = "config/input.yaml"
+
+    def __init__(self) -> None:
+        with open(os.path.join(os.path.dirname(__file__), self.inputs_config)) as f:
+            self.inputs = yaml.safe_load(f)
 
     @agent
     def mia_agent(self) -> Agent:

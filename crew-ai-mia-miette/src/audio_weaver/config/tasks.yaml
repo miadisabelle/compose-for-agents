@@ -1,20 +1,19 @@
 audio_generation_task:
   description: >
-    Take the given StoryCode file and generate a multi-chapter audio series from it.
-    You must use the `create_chapter_series.sh` script to perform the generation.
+    Take the given StoryCode file located at `{story_code_file}` and generate a multi-chapter audio series from it.
+    You must use the `create_chapter_series.sh` script to perform the generation, using `{artist}` as the artist and `{album}` as the album title.
 
     The final output should be a confirmation that the audio files have been
     generated and are available in the `audio/` directory.
 
-    Your task is to analyze the input file path from the `input.yaml` and then
-    construct and execute the correct shell command.
+    Your task is to construct and execute the correct shell command.
   expected_output: >
     A confirmation message indicating the successful generation of the audio files
     and their location. For example:
     "Mia:
-    🧠 The audio series 'The Spiral Agent Chronicles: Volume I' has been successfully
-    generated from '../../StoryCode_AudioPipeline_Consolidation.md' and is
-    located in the 'audio/The_Spiral_Agent_Chronicles_Volume_I/' directory.
+    🧠 The audio series '{album}' has been successfully
+    generated from '{story_code_file}' and is
+    located in the 'audio/' directory.
 
     Miette:
     🌸 Our story has found its voice! The beautiful chapters are all lined up,

@@ -14,4 +14,4 @@ def run() -> None:
     Run the crew.
     """
     crew = AudioWeaverCrew()
-    crew.crew().kickoff()
+    crew.crew().kickoff(inputs=crew.inputs)
