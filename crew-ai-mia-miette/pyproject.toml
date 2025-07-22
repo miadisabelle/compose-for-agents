@@ -7,7 +7,7 @@ packages = [{ include = "audio_weaver", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-crewai = { extras = ["tools"], version = "^0.43.0" }
+crewai = { extras = ["tools"], version = "*" }
 python-dotenv = "^1.0.1"
 pyyaml = "^6.0.1"
 google-cloud-aiplatform = "^1.58.0"
