@@ -3,7 +3,6 @@ name = "audio_weaver"
 version = "0.1.0"
 description = "A crew to produce audio from storycode"
 authors = ["Mia & Miette"]
-readme = "README.md"
 packages = [{ include = "audio_weaver", from = "src" }]
 
 [tool.poetry.dependencies]
