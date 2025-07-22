@@ -2,22 +2,23 @@
 FROM python:3.13-slim
 ENV PYTHONUNBUFFERED=1
 
-RUN pip install uv==0.2.19
+RUN pip install uv
 RUN pip install poetry
 
 WORKDIR /app
 # Install system dependencies
-COPY pyproject.toml poetry.lock* README.md ./
+#COPY pyproject.toml  README.md ./
+COPY . .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv pip install --system -r pyproject.toml && \
     rm -fr build dist *.egg-info
 # Copy application code
-COPY src/ /app/src
-COPY scripts/ /app/scripts
+#COPY src/ /app/src
+#COPY scripts/ /app/scripts
 RUN python -m compileall -q .
 
 COPY <<EOF /entrypoint.sh
-#!/bin/sh
+#!/bin/bash
 
 if test -f /run/secrets/openai-api-key; then
     export OPENAI_API_KEY=$(cat /run/secrets/openai-api-key)
