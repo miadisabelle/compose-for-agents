@@ -1,0 +1,6 @@
+*
+!/src
+!/scripts
+!/poetry.lock
+!/pyproject.toml
+!/README.md 
