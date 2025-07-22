@@ -1,4 +1,5 @@
 *
-!./src
-!./pyproject.toml
-!./poetry.lock
+!/src
+!/scripts
+!/poetry.lock
+!/pyproject.toml
