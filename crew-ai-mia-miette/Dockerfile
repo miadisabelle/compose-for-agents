@@ -3,10 +3,11 @@ FROM python:3.13-slim
 ENV PYTHONUNBUFFERED=1
 
 RUN pip install uv==0.2.19
+RUN pip install poetry
 
 WORKDIR /app
 # Install system dependencies
-COPY pyproject.toml poetry.lock* ./
+COPY pyproject.toml poetry.lock* README.md ./
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv pip install --system -r pyproject.toml && \
     rm -fr build dist *.egg-info
