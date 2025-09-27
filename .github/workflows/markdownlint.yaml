@@ -1,17 +1,17 @@
 # .github/workflows/markdownlint.yml
-name: Lint
+name: Lint Markdown
 
 on:
   push:
     paths:
-      - '**/*.md'
-      - '.github/workflows/markdownlint.yaml'
+      - "**/*.md"
+      - .github/workflows/markdownlint.yaml
     branches:
       - main
   pull_request:
     paths:
-      - '**/*.md'
-      - '.github/workflows/markdownlint.yaml'
+      - "**/*.md"
+      - .github/workflows/markdownlint.yaml
 
 permissions:
   contents: read

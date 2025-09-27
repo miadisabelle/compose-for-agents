@@ -1,0 +1,40 @@
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres_db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: [CMD, pg_isready, -q, -d, postgres, -U, postgres]
+      interval: 5s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
+
+  akka-helloworld-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      tags:
+        - akka-helloworld-agent:0.1
+    container_name: akka-helloworld-agent
+    depends_on:
+      - postgres-db
+    ports:
+      - 9000:9000
+    secrets:
+      - openai-api-key
+    environment:
+      # jvm -D properties can be added under this environment map (note: remove this comment when adding properties)
+      # JAVA_TOOL_OPTIONS: -Dconfig.resource=/root/.akka/local/api-key.conf
+      JAVA_TOOL_OPTIONS: -Dakka.runtime.http-interface=0.0.0.0
+      STANDALONE_SINGLE_NODE: true
+      DB_HOST: postgres-db
+      HTTP_PORT: "9000"
+
+secrets:
+  openai-api-key:
+    file: secret.openai-api-key

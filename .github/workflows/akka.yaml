@@ -1,0 +1,34 @@
+name: Akka CI
+
+on:
+  push:
+    paths:
+      - .github/workflows/akka.yaml
+      - akka/**
+    branches:
+      - main
+  pull_request:
+    paths:
+      - .github/workflows/akka.yaml
+      - akka/**
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: akka
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Compose
+        uses: ./.github/actions/setup-compose
+
+      - name: Build Docker images
+        run: docker compose build
